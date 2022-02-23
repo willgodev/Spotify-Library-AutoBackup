@@ -4,7 +4,24 @@ from spotipy.oauth2 import SpotifyOAuth
 import pprint
 from collections import defaultdict
 
-scope = "user-library-read user-read-recently-played playlist-read-private playlist-modify-private playlist-modify-public"
+user_lib_read = "user-library-read"
+user_read_recently_played = "user-read-recently-played"
+playlist_read_private = "playlist-read-private"
+playlist_write_private = "playlist-modify-private"
+playlist_write_public = "playlist-modify-public"
+
+permissions = [
+    user_lib_read,
+    user_read_recently_played,
+    playlist_read_private,
+    playlist_write_private,
+    playlist_write_public
+]
+
+scope = permissions[0]
+
+for i in range(1, len(permissions)):
+    scope += " " + permissions[i]
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 
